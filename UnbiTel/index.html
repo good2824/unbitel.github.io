@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnbiTel - ¡Tu Conexión a Internet de Alta Calidad!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <style>
+        :root {
+            --primary-color: #FF6600;
+            --secondary-color: #333;
+            --light-gray: #fbfbfbff;
+            --text-color: #555;
+            --white: #fff;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease-in-out;
+            --nav-bg-color: rgba(251, 227, 201, 0.9);
+            --nav-link-hover-bg: rgba(148, 127, 127, 0.8);
+            
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        header {
+           
+            background-color: var(--nav-bg-color); 
+            padding: 10px 30px; 
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;   
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+
+        }
+
+      header .logo {
+      max-width: 110px; 
+      height: auto;
+      margin: 0; 
+      }
+
+       
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 0.95em;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: var(--nav-link-hover-bg);
+            color: var(--white);
+        }
+
+         /* --- ESTILOS DEL RECOMENDADOR DE PLANES --- */
+        .container-form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            margin: 50px auto; /* Centrar y darle margen */
+        }
+        .container-form h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .container-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .container-form select, .container-form input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            background-color: #fcfcfc;
+        }
+        .container-form select:focus, .container-form input[type="number"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
+        }
+        .container-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .container-form button:hover {
+            background-color: #e65c00;
+        }
+        #recomendacion-resultado {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9f7ef; /* Un color suave para el resultado */
+            border: 1px solid #cce8d6;
+            border-radius: 8px;
+            text-align: center;
+            color: #333;
+            font-size: 1.1em;
+            display: none; /* Oculto por defecto */
+        }
+        #recomendacion-resultado p {
+            margin: 0 0 10px 0;
+        }
+        #recomendacion-resultado strong {
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+
+        .hero {
+            background-image: url(inicio.png);
+            color: var(--white);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+            padding: 120px 30px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #e65c00;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 30px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        .about-us-content {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+
+        .about-us-content p {
+            color: var(--secondary-color);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .plan-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .plan-category-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .plan-category-btn.active,
+        .plan-category-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            display: none; /* Oculto por defecto */
+        }
+
+        .plans-grid.active {
+            display: grid;
+        }
+
+        .plan-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .plan-card h3 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .plan-card .speed {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .plan-card .price {
+            font-size: 3em;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .plan-card .price span {
+            font-size: 0.5em;
+            font-weight: 400;
+        }
+
+        .plan-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+            text-align: left;
+            color: var(--text-color);
+        }
+
+        .plan-card ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .plan-card ul li::before {
+            content: '✓';
+            color: green;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .plan-card .btn-select {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .plan-card .btn-select:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* La sección de contacto ya no es una sección principal */
+        #contact {
+            display: none; /* Ocultamos la sección de contacto principal */
+        }
+ 
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            font-size: 0.9em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* Espacio entre elementos del footer */
+        }
+
+        footer .contact-info-footer {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Espacio entre las líneas de contacto */
+        }
+
+        footer .contact-info-footer p {
+            margin: 0;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer .contact-info-footer p .fa-solid {
+            margin-right: 8px;
+            color: var(--primary-color); /* Color para los iconos */
+            font-size: 1.1em;
+        }
+
+        footer .contact-info-footer a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        footer .contact-info-footer a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .office-hours-footer {
+            margin-top: 5px;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+         .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Diseño Responsivo */
+        @media (max-width: 768px) {
+             header {
+                flex-direction: column; /* Apilar logo y nav en pantallas pequeñas */
+                padding: 15px 20px;
+            }
+
+            header .logo {
+                margin-bottom: 15px; /* Espacio entre logo y nav apilado */
+            }
+            .hero {
+                padding: 100px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.8em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .plan-categories {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 20px;
+            }
+            
+            footer .contact-info-footer p {
+                flex-direction: column; /* Apilar iconos y texto en pantallas pequeñas */
+                align-items: center;
+                text-align: center;
+            }
+            footer .contact-info-footer p .fa-solid {
+                margin-right: 0;
+                margin-bottom: 5px; /* Espacio entre icono y texto apilado */
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="navbar-brand fw-bold" href="index2.php">
+            <img src="Logotipo_unbitel.png" alt="UnbiTel Logo"  class="logo">
+            
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#about" class="active">Nosotros</a></li>
+                <li><a href="#plans">Planes</a></li>
+                <li><a href="#footer-contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Conectividad de Banda Ancha para tu Mundo</h1>
+                <p>Internet de alta velocidad y confiable para hogares y negocios. ¡Descubre nuestros planes!</p>
+                <a href="#plans" class="btn-primary">Ver Planes</a>
+            </div>
+        </section>
+
+        <section id="about" class="container about-us-content">
+            <h2 class="section-title">Acerca de Nosotros</h2>
+            <p>En UnbiTel, estamos dedicados a proporcionar soluciones de internet de vanguardia con un enfoque en la calidad y la satisfacción del cliente. Entendemos la importancia de una conexión a internet rápida y estable en el mundo actual, ya sea para el trabajo, el entretenimiento o la comunicación con tus seres queridos.</p>
+            <p>Nuestra misión es ofrecerte planes de internet flexibles y asequibles, respaldados por un equipo de soporte técnico experto y amable. Nos esforzamos por superar tus expectativas y garantizar que tengas la mejor experiencia de navegación posible.</p>
+            <p>Con UnbiTel, obtienes más que solo internet: obtienes un socio confiable que se preocupa por tu conectividad.</p>
+        </section>
+
+        <section id="plans" class="container">
+            <h2 class="section-title">Nuestros Planes de Internet</h2>
+
+            <div class="plan-categories">
+                <button class="plan-category-btn active" data-category="fiber">Fibra Óptica</button>
+                <button class="plan-category-btn" data-category="wireless">Inalámbricos</button>
+            </div>
+
+            <div id="fiber-plans" class="plans-grid active">
+                <div class="plan-card">
+                    <h3>Fibra Light</h3>
+                    <p class="speed">30 Mbps / 10 Mbps</p>
+                    <p class="price">RD$ <span>1,350</span></p>
+                    <ul>
+                        <li>✓ Navegación fluida y redes sociales</li>
+                        <li>✓ Adecuado para streaming en SD</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Fibra Esencial</h3>
+                    <p class="speed">50 Mbps / 15 Mbps</p>
+                    <p class="price">RD$ <span>1,595</span></p>
+                    <ul>
+                        <li>✓ Streaming en HD y videollamadas</li>
+                        <li>✓ Descargas más rápidas</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Fibra Avanzada</h3>
+                    <p class="speed">75 Mbps / 25 Mbps</p>
+                    <p class="price">RD$ <span>1,995</span></p>
+                    <ul>
+                        <li>✓ Múltiples dispositivos conectados</li>
+                        <li>✓ Juegos en línea sin interrupciones</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Fibra Pro</h3>
+                    <p class="speed">100 Mbps / 50 Mbps</p>
+                    <p class="price">RD$ <span>2,295</span></p>
+                    <ul>
+                        <li>✓ Ideal para teletrabajo y estudio en línea</li>
+                        <li>✓ Descargas y cargas rápidas</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Fibra Turbo</h3>
+                    <p class="speed">200 Mbps / 50 Mbps</p>
+                    <p class="price">RD$ <span>3,295</span></p>
+                    <ul>
+                        <li>✓ Para usuarios exigentes y streaming 4K</li>
+                        <li>✓ Rendimiento superior en el hogar</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Fibra Elite</h3>
+                    <p class="speed">300 Mbps / 50 Mbps</p>
+                    <p class="price">RD$ <span>4,295</span></p>
+                    <ul>
+                        <li>✓ Rendimiento extremo para las demandas más altas</li>
+                        <li>✓ La mejor experiencia de internet disponible</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+            </div>
+
+            <div id="wireless-plans" class="plans-grid">
+                <div class="plan-card">
+                    <h3>Elemental Inalámbrico</h3>
+                    <p class="speed">10 Mbps / 5 Mbps</p>
+                    <p class="price">RD$ <span>1,000</span></p>
+                    <ul>
+                        <li>✓ Conexión inalámbrica básica</li>
+                        <li>✓ Ideal para uso ligero de internet</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Light Inalámbrico</h3>
+                    <p class="speed">15 Mbps / 5 Mbps</p>
+                    <p class="price">RD$ <span>1,350</span></p>
+                    <ul>
+                        <li>✓ Navegación y redes sociales inalámbricas</li>
+                        <li>✓ Adecuado para streaming ocasional</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Esencial Inalámbrico</h3>
+                    <p class="speed">20 Mbps / 5 Mbps</p>
+                    <p class="price">RD$ <span>1,695</span></p>
+                    <ul>
+                        <li>✓ Streaming y videollamadas inalámbricas</li>
+                        <li>✓ Buena velocidad para el hogar</li>
+                        <li>✓ Sin contratos</li>
+                    </ul>
+                    <a href="#" class="btn-select">Seleccionar</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #777;">
+                Rentas incluyen impuestos (ITBIS 18%, ISC 10% y CDT 1%). Planes Inalámbricos según disponibilidad del sector. Algunas restricciones aplican. Planes sin degradación, ilimitados y sin contratos.
+            </p>
+        </section>
+        <section id="recomendador" class="container-form">
+            <h2>Recomendador de Plan de Internet UnbiTel</h2>
+            <form id="planRecomendadorForm">
+                <div class="form-group">
+                    <label for="num_personas">Número de personas en casa:</label>
+                    <input type="number" id="num_personas" name="num_personas" min="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="num_camaras">Número de cámaras de seguridad:</label>
+                    <input type="number" id="num_camaras" name="num_camaras" min="0" value="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="streaming_calidad">Calidad de Streaming deseada:</label>
+                    <select id="streaming_calidad" name="streaming_calidad">
+                        <option value="SD">SD (Netflix, YouTube básico)</option>
+                        <option value="HD">HD (Netflix, YouTube HD)</option>
+                        <option value="4K">4K (Netflix 4K, YouTube 4K)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="juegos_online">¿Juegas online frecuentemente?</label>
+                    <select id="juegos_online" name="juegos_online">
+                        <option value="no">No</option>
+                        <option value="si">Sí</option>
+                    </select>
+                </div>
+
+                <button type="submit">Recomendar Plan</button>
+            </form>
+
+            <div id="recomendacion-resultado">
+                <p>Basado en tus necesidades, te recomendamos el plan:</p>
+                <p><strong><span id="plan-sugerido"></span></strong></p>
+                <p>Este plan ofrece <span id="velocidad-sugerida"></span> y está diseñado para <span id="descripcion-sugerida"></span>.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="footer-contact">
+        
+        <div class="contact-info-footer">
+            <p><i class="fa-solid fa-map-marker-alt"></i> Calle Mario Nelson Galan esquina Calle Mella, Zaiter Centro Comercial, Mod 104, Jarabacoa</p>
+            <p><i class="fa-solid fa-phone"></i> <a href="tel:+18095875757">(809) 587-5757</a></p>
+            <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@unbitel.com.do">info@unbitel.com.do</a></p>
+            <p class="office-hours-footer">Horario de Oficina: Lunes a Viernes de 8:00AM a 8:00PM | Sábados y Domingos de 9:00AM a 5:00PM</p>
+        </div>
+        <p>© 2025 UnbiTel. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling para la navegación
+            document.querySelectorAll('nav ul li a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Remover clase 'active' del enlace actual
+                    const currentActive = document.querySelector('nav ul li a.active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active');
+                    }
+                    // Añadir clase 'active' al enlace clickeado
+                    this.classList.add('active');
+
+                    // Obtener el ID del destino (ej. #about, #plans, #footer-contact)
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Cambio de categoría de planes
+            const planCategoryButtons = document.querySelectorAll('.plan-category-btn');
+            const fiberPlans = document.getElementById('fiber-plans');
+            const wirelessPlans = document.getElementById('wireless-plans');
+
+            planCategoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover la clase activa de todos los botones
+                    planCategoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Añadir la clase activa al botón clicado
+                    this.classList.add('active');
+
+                    const category = this.dataset.category;
+
+                    if (category === 'fiber') {
+                        fiberPlans.classList.add('active');
+                        wirelessPlans.classList.remove('active');
+                    } else if (category === 'wireless') {
+                        wirelessPlans.classList.add('active');
+                        fiberPlans.classList.remove('active');
+                    }
+                });
+            });
+
+            // Actualizar la clase 'active' en la navegación al hacer scroll
+            const sections = document.querySelectorAll('main section, footer');
+            const navLinks = document.querySelectorAll('nav ul li a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) { // Un pequeño offset para que cambie antes de llegar al top
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+         // Lógica del Recomendador de Planes
+            document.getElementById('planRecomendadorForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
+
+                const numPersonas = parseInt(document.getElementById('num_personas').value);
+                const numCamaras = parseInt(document.getElementById('num_camaras').value);
+                const streamingCalidad = document.getElementById('streaming_calidad').value;
+                const juegosOnline = document.getElementById('juegos_online').value;
+
+                let planRecomendado = "";
+                let velocidadRecomendada = "";
+                let descripcionPlan = "";
+
+                // Lógica para recomendar el plan (ajusta esta lógica según tus planes exactos)
+                if (numPersonas <= 2 && numCamaras === 0 && streamingCalidad === "SD" && juegosOnline === "no") {
+                    planRecomendado = "Fibra Light (20 Mbps)";
+                    velocidadRecomendada = "20 Mbps de descarga y 20 Mbps de subida";
+                    descripcionPlan = "navegación fluida y redes sociales, ideal para uso básico.";
+                } else if (numPersonas <= 3 && numCamaras <= 1 && streamingCalidad === "HD" && juegosOnline === "no") {
+                    planRecomendado = "Fibra Esencial (30 Mbps)";
+                    velocidadRecomendada = "30 Mbps de descarga y 20 Mbps de subida";
+                    descripcionPlan = "streaming en HD y videollamadas con buena calidad.";
+                } else if (numPersonas <= 4 && numCamaras <= 2 && streamingCalidad === "HD" && juegosOnline === "si") {
+                    planRecomendado = "Fibra Avanzada (40 Mbps)";
+                    velocidadRecomendada = "40 Mbps de descarga y 20 Mbps de subida";
+                    descripcionPlan = "múltiples dispositivos conectados, juegos en línea y streaming HD.";
+                } else if (numPersonas >= 5 && numCamaras >= 3 && streamingCalidad === "4K" && juegosOnline === "si") {
+                    planRecomendado = "Fibra Ultra (150 Mbps)";
+                    velocidadRecomendada = "150 Mbps de descarga y 50 Mbps de subida";
+                    descripcionPlan = "familias grandes, streaming 4K, teletrabajo intensivo y juegos online sin interrupciones.";
+                } else if (numPersonas >= 4 && numCamaras <= 2 && streamingCalidad === "4K" && juegosOnline === "no") {
+                    planRecomendado = "Fibra Pro (60 Mbps)";
+                    velocidadRecomendada = "60 Mbps de descarga y 30 Mbps de subida";
+                    descripcionPlan = "teletrabajo, estudio en línea y streaming 4K ocasional.";
+                } else {
+                    // Opción por defecto o para casos no cubiertos específicamente
+                    planRecomendado = "Fibra Turbo (90 Mbps)";
+                    velocidadRecomendada = "90 Mbps de descarga y 30 Mbps de subida";
+                    descripcionPlan = "usuarios exigentes, múltiples tareas simultáneas y streaming 4K.";
+                }
+
+                // Actualizar el div de resultado
+                document.getElementById('plan-sugerido').textContent = planRecomendado;
+                document.getElementById('velocidad-sugerida').textContent = velocidadRecomendada;
+                document.getElementById('descripcion-sugerida').textContent = descripcionPlan;
+                document.getElementById('recomendacion-resultado').style.display = 'block'; // Mostrar el resultado
+            });
+        });
+    </script>
+</body>
+</html>
